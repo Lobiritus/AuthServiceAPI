@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: AuthService API
+  description: Сервис аутентификации и авторизации пользователей.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Разработческий сервер
+paths:
+  /register:
+    post:
+      summary: Регистрация нового пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+                - email
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '201':
+          description: Пользователь успешно зарегистрирован
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                successfulRegistration:
+                  value:
+                    message: "Пользователь успешно зарегистрирован"
+        '400':
+          description: Ошибка в запросе
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                badRequest:
+                  value:
+                    error: "Ошибка в запросе: отсутствуют необходимые данные пользователя"
+  /login:
+    post:
+      summary: Вход пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Успешный вход, возвращает JWT токен
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        '401':
+          description: Неверное имя пользователя или пароль

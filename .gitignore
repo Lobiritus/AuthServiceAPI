@@ -1,0 +1,21 @@
+# Файлы сертификатов
+key.pem
+cert.pem
+
+# Директория с данными PostgreSQL
+/pgdata/
+
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/
+
+/vendor/
+/node_modules/
+/dist/
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.temp
